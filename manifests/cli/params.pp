@@ -40,8 +40,20 @@
 #
 class php::cli::params {
 
+
+  case $::osfamily {
+    'RedHat': {
+       $package            = 'php-cli'  
+    }
+    'Debian': {
+       $package            = 'php5-cli'  
+    }
+    default: {
+        fail("Unsupported OS family")
+    }  
+  }
+
   $ensure   = $php::params::ensure
-  $package  = 'php5-cli'
   $provider = undef
   $inifile  = '/etc/php5/cli/php.ini'
   $settings = [ ]
