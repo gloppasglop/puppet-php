@@ -49,14 +49,16 @@ class php::fpm::params inherits php::params {
       $package            = 'php-fpm'  
       $service_name       = 'php-fpm'
       $inifile            = '/etc/php.ini'
-
+      $pool_conf_dir      = '/etc/php-fpm.d/'
     }
+
     'Debian': {
       $package            = 'php5-fpm'  
       $service_name       = 'php5-fpm'
       $inifile            = '/etc/php5/fpm/php.ini'
-
+      $pool_conf_dir      = '/etc/php5/fpm/pool.d/'
     }
+
     default: {
         fail("Unsupported OS family")
     }  
