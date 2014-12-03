@@ -8,7 +8,8 @@ class php::fpm::package(
   $package_provider
 ) {
 
-  package { $package_name:
+  package { 'php5-fpm':
+    name     => $package_name,
     ensure   => $package_ensure,
     provider => $package_provider
   }
