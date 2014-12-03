@@ -56,8 +56,7 @@ define php::fpm::pool (
   $log_errors = true,
   $error_log = true,
   $config_mode = '0644',
-  $pool_conf_dir = $php::fpm::params:pool_conf_dir,
-'
+  $pool_conf_dir = $php::fpm::params::pool_conf_dir,
 ) {
 
   $pool = $title
@@ -66,12 +65,12 @@ define php::fpm::pool (
   $group_final = $group ? { undef => $user, default => $group }
 
   if ($ensure == 'absent') {
-    file { "/etc/php5/fpm/pool.d/${pool}.conf":
+    file { "${pool_conf_dir}/${pool}.conf":
       ensure => absent,
       notify => Service['php5-fpm']
     }
   } else {
-    file { "/etc/php5/fpm/pool.d/${pool}.conf":
+    file { "${pool_conf_dir}/${pool}.conf":
       ensure  => file,
       notify  => Service['php5-fpm'],
       require => Package['php5-fpm'],
