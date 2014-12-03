@@ -10,7 +10,8 @@ class php::fpm::service(
   $provider
 ) {
 
-  service { $service_name:
+  service { 'php5-fpm':
+    name     => $service_name,
     ensure    => $ensure,
     enable    => $enable,
     restart   => "service ${service_name} reload",
