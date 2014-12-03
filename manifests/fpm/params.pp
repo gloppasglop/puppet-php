@@ -42,17 +42,20 @@ class php::fpm::params inherits php::params {
 
   $ensure             = $::php::params::ensure
   $provider           = undef
-  $inifile            = '/etc/php5/fpm/php.ini'
   $settings           = [ ]
 
   case $::osfamily {
     'RedHat': {
-       $package            = 'php-fpm'  
-       $service_name       = 'php-fpm'
+      $package            = 'php-fpm'  
+      $service_name       = 'php-fpm'
+      $inifile            = '/etc/php.ini'
+
     }
     'Debian': {
-       $package            = 'php5-fpm'  
-       $service_name       = 'php5-fpm'
+      $package            = 'php5-fpm'  
+      $service_name       = 'php5-fpm'
+      $inifile            = '/etc/php5/fpm/php.ini'
+
     }
     default: {
         fail("Unsupported OS family")
