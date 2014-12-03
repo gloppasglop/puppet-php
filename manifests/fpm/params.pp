@@ -46,14 +46,17 @@ class php::fpm::params inherits php::params {
   $settings           = [ ]
 
   case $::osfamily {
-    'RedHat':
+    'RedHat': {
        $package            = 'php-fpm'  
        $service_name       = 'php-fpm'
-    'Debian':
+    }
+    'Debian': {
        $package            = 'php5-fpm'  
        $service_name       = 'php5-fpm'
-    default:
+    }
+    default: {
         fail("Unsupported OS family")
+    }  
   }
 
   $service_ensure     = 'running'
