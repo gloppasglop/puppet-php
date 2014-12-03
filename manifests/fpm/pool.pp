@@ -56,6 +56,8 @@ define php::fpm::pool (
   $log_errors = true,
   $error_log = true,
   $config_mode = '0644',
+  $pool_conf_dir = $php::fpm::params:pool_conf_dir,
+'
 ) {
 
   $pool = $title
