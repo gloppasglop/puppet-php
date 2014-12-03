@@ -40,8 +40,19 @@
 #
 class php::extension::apcu::params {
 
+
+  case $::osfamily {
+    'RedHat': {
+         $package  = 'php-pecl-apcu'
+    }
+    'Debian': {
+		  $package  = 'php5-apcu'
+    }
+    default: {
+        fail("Unsupported OS family")
+    }  
+  }
   $ensure   = $php::params::ensure
-  $package  = 'php5-apcu'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/apcu.ini"
   $settings = []

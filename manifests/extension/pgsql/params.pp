@@ -40,8 +40,19 @@
 #
 class php::extension::pgsql::params {
 
+
+  case $::osfamily {
+    'RedHat': {
+         $package  = 'php-pgsql'
+    }
+    'Debian': {
+		  $package  = 'php5-pgsql'
+    }
+    default: {
+        fail("Unsupported OS family")
+    }  
+  }
   $ensure   = $php::params::ensure
-  $package  = 'php5-pgsql'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/pgsql.ini"
   $settings = [ ]

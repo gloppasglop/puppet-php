@@ -40,8 +40,19 @@
 #
 class php::extension::gd::params {
 
+  case $::osfamily {
+    'RedHat': {
+         $package  = 'php-gd'
+    }
+    'Debian': {
+		  $package  = 'php5-gd'
+    }
+    default: {
+        fail("Unsupported OS family")
+    }  
+  }
+
   $ensure   = $php::params::ensure
-  $package  = 'php5-gd'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/gd.ini"
   $settings = [ ]
